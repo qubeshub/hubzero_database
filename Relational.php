@@ -7,6 +7,9 @@
 
 namespace Qubeshub\Database;
 
+require_once PATH_APP . DS . 'libraries' . DS . 'Qubeshub' . DS . 'Database' . DS . 'Traits' . DS . 'ErrorBag.php';
+require_once PATH_APP . DS . 'libraries' . DS . 'Qubeshub' . DS . 'Database' . DS . 'Rows.php';
+
 use Hubzero\Database\Relationship\BelongsToOne;
 use Hubzero\Database\Relationship\OneToMany;
 use Hubzero\Database\Relationship\ManyToMany;
@@ -88,7 +91,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 *
 	 * @var  \Hubzero\Database\Driver|object
 	 **/
-	private static $connection = null;
+	private $connection = null;
 
 	/**
 	 * Whether or not we're caching query results
@@ -135,7 +138,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	/**
 	 * The parent iterator if this model was retrieved as part of a larger rows collection
 	 *
-	 * @var  \Hubzero\Database\Rows
+	 * @var  \Qubeshub\Database\Rows
 	 **/
 	private $collection = null;
 
@@ -341,7 +344,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 
 			// Call method and get type of response
 			$result = call_user_func_array(array($this->query, $name), $arguments);
-			$class  = __NAMESPACE__ . '\\Query';
+			$class  = 'Hubzero\\Database\\Query';
 			// We never want to return an instance of the query class, because
 			// we want to be able to chain methods together that are on the model
 			// itself.  Plus we auto-forward calls to query functions, so they'll
@@ -497,9 +500,9 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 * @return  void
 	 * @since   2.0.0
 	 **/
-	public static function setDefaultConnection($connection)
+	public function setDefaultConnection($connection)
 	{
-		self::$connection = $connection;
+		$this->connection = $connection;
 	}
 
 	/**
@@ -792,7 +795,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 **/
 	public function getQuery()
 	{
-		return new Query(self::$connection);
+		return new \Hubzero\Database\Query($this->connection);
 	}
 
 	/**
@@ -803,7 +806,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 **/
 	public function getStructure()
 	{
-		return new Structure(self::$connection);
+		return new \Hubzero\Database\Structure($this->connection);
 	}
 
 	/**
@@ -881,7 +884,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	/**
 	 * Sets an interator parent on the model
 	 *
-	 * @param   \Hubzero\Database\Rows  $rows  The iterator to set
+	 * @param   \Qubeshub\Database\Rows  $rows  The iterator to set
 	 * @return  $this
 	 * @since   2.1.0
 	 **/
@@ -1083,7 +1086,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	/**
 	 * Counts rows, fetching them first
 	 *
-	 * The {@link \Hubzero\Database\Rows} class also has a count method, which is used
+	 * The {@link \Qubeshub\Database\Rows} class also has a count method, which is used
 	 * to count rows after they've already been fetched.
 	 *
 	 * If possible, you shouldn't use this method.  We have to make a clone of the current
@@ -1104,7 +1107,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 * Gets the results of the established query
 	 *
 	 * @param   bool  $parseIncludes  Whether or not to parse the includes
-	 * @return  \Hubzero\Database\Rows
+	 * @return  \Qubeshub\Database\Rows
 	 * @since   2.0.0
 	 **/
 	public function rows($parseIncludes = true)
@@ -1144,7 +1147,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 * Sets the results of the query on new models and returns a Rows collection
 	 *
 	 * @param   array  $data  The data to set on the model
-	 * @return  \Hubzero\Database\Rows
+	 * @return  \Qubeshub\Database\Rows
 	 * @since   2.0.0
 	 **/
 	public function rowsFromRaw($data)
@@ -1168,7 +1171,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 * We go ahead and use a copy, that way future calls to the same model will
 	 * continue to have the initial query elements set in place
 	 *
-	 * @return  \Hubzero\Database\Rows
+	 * @return  \Qubeshub\Database\Rows
 	 * @since   2.0.0
 	 **/
 	public function getIterator()
@@ -1798,8 +1801,8 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 *
 	 * @FIXME: decide whether or not to use this
 	 *
-	 * @param   \Hubzero\Database\Rows  $rows  The rows to seed
-	 * @return  \Hubzero\Database\Rows
+	 * @param   \Qubeshub\Database\Rows  $rows  The rows to seed
+	 * @return  \Qubeshub\Database\Rows
 	 * @since   2.0.0
 	 **/
 	private function seed($rows)
@@ -2229,8 +2232,8 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	/**
 	 * Retrieves an associated model in conjunction with the current one
 	 *
-	 * @param   \Hubzero\Database\Rows  $rows  The rows to parse and augment
-	 * @return  \Hubzero\Database\Rows
+	 * @param   \Qubeshub\Database\Rows  $rows  The rows to parse and augment
+	 * @return  \Qubeshub\Database\Rows
 	 * @since   2.0.0
 	 **/
 	private function parseIncluding($rows)
@@ -2319,7 +2322,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	 * Gets the defined relationship
 	 *
 	 * @param   string  $name  The relationship to return
-	 * @return  \Hubzero\Database\Rows|\Hubzero\Database\Relational|static
+	 * @return  \Qubeshub\Database\Rows|\Hubzero\Database\Relational|static
 	 * @since   2.0.0
 	 **/
 	public function getRelationship($name)
