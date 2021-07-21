@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database;
+namespace Qubeshub\Database;
 
 /**
  * Database ORM class for implementing nested set records

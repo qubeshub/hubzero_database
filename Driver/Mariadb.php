@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Driver;
+namespace Qubeshub\Database\Driver;
 
 /**
  * MariaDB (Pdo) database driver

@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Exception;
+namespace Qubeshub\Database\Exception;
 
 class ConnectionFailedException extends \Hubzero\Error\Exception\RuntimeException
 {

@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Relationship;
+namespace Qubeshub\Database\Relationship;
 
 /**
  * Database many to many relationship

@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Value;
+namespace Qubeshub\Database\Value;
 
 /**
  * Database basic value class

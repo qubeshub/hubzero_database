@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database;
+namespace Qubeshub\Database;
 
 use Hubzero\Utility\Str;
 use Hubzero\Error\Exception\RuntimeException;

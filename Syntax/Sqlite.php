@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Syntax;
+namespace Qubeshub\Database\Syntax;
 
 use Hubzero\Database\Exception\UnsupportedSyntaxException;
 

@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database;
+namespace Qubeshub\Database;
 
 use Hubzero\Database\Relationship\BelongsToOne;
 use Hubzero\Database\Relationship\OneToMany;

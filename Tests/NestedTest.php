@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Tests;
+namespace Qubeshub\Database\Tests;
 
 use Hubzero\Test\Database;
 use Hubzero\Database\Tests\Mock\Discussion;

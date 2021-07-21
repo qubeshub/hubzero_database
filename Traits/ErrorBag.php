@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Traits;
+namespace Qubeshub\Database\Traits;
 
 /**
  * Error message bag for shared error handling logic

@@ -5,7 +5,7 @@
  * @license    http://opensource.org/licenses/MIT MIT
  */
 
-namespace Hubzero\Database\Syntax;
+namespace Qubeshub\Database\Syntax;
 
 /**
  * Database MariaDB query syntax class
