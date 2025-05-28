@@ -83,7 +83,7 @@ class Asset
 		$asset->set('name', $name);
 		$asset->set('title', $title);
 
-		if ($this->model->assetRules instanceof \JAccessRules || $this->model->assetRules instanceof \Hubzero\Access\Rules)
+		if ($this->model->assetRules instanceof \Hubzero\Access\Rules)
 		{
 			$asset->set('rules', (string)$this->model->assetRules);
 		}
