@@ -35,36 +35,36 @@ class Pdo extends Driver
 			throw new ConnectionFailedException('PDO does not appear to be installed or enabled.', 500);
 		}
 
-		// Try to connect
+		// Make sure the DSN is set
+		if (!isset($options['dsn']) || !$options['dsn'])
+		{
+			throw new ConnectionFailedException('DSN for PDO connection not set.', 500);
+		}
+
+		// Make sure extra PDO options array is set
+		if (!isset($options['extras']))
+		{
+			$options['extras'] = [];
+		}
+
 		try
 		{
-			// Make sure the DSN is set
-			if (!isset($options['dsn']) || !$options['dsn'])
-			{
-				throw new ConnectionFailedException('DSN for PDO connection not set.', 500);
-			}
-
-			// Make sure extra PDO options array is set
-			if (!isset($options['extras']))
-			{
-				$options['extras'] = [];
-			}
-
-			// Establish connection string
-			$this->setConnection(new \PDO(
+			// Try to connect
+			$conn = new \PDO(
 				(string)$options['dsn'],
 				(string)$options['user'],
 				(string)$options['password'],
-				(array)$options['extras']
-			));
+				(array)$options['extras']);
+
+			// Set error reporting to throw exceptions
+			$this->throwExceptions();
 		}
 		catch (\PDOException $e)
 		{
-			throw new ConnectionFailedException($e->getMessage(), 500);
+			$conn = null;
 		}
 
-		// Set error reporting to throw exceptions
-		$this->throwExceptions();
+		$this->setConnection($conn);
 
 		// Call parent construct
 		parent::__construct($options);
