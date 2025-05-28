@@ -28,9 +28,9 @@ class ErrorBagTraitTest extends Basic
 	 *
 	 * @return  void
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
-		$this->obj = $this->getObjectForTrait('Hubzero\Database\Traits\ErrorBag');
+		$this->traitObject = $this->getObjectForTrait('Hubzero\Database\Traits\ErrorBag');
 
 		parent::setUp();
 	}
@@ -47,25 +47,25 @@ class ErrorBagTraitTest extends Basic
 	public function testErrorBag()
 	{
 		// Test that an array is returned
-		$errors = $this->obj->getErrors();
+		$errors = $this->traitObject->getErrors();
 
 		// Test that the array is empty
 		$this->assertTrue(is_array($errors));
 		$this->assertCount(0, $errors);
 
 		// Set some errors
-		$this->obj->addError('Donec sed odio dui.');
-		$this->obj->addError(new Exception('Aenean lacinia bibendum.'));
-		$this->obj->addError('Nulla sed consectetur.');
+		$this->traitObject->addError('Donec sed odio dui.');
+		$this->traitObject->addError(new Exception('Aenean lacinia bibendum.'));
+		$this->traitObject->addError('Nulla sed consectetur.');
 
 		// Get the list of set errors
-		$errors = $this->obj->getErrors();
+		$errors = $this->traitObject->getErrors();
 
 		// Make sure:
 		//    - the list of errors matches the number of errors set
 		//    - getError() returns the first error set
 		$this->assertCount(3, $errors);
-		$this->assertEquals($this->obj->getError(), 'Donec sed odio dui.');
+		$this->assertEquals($this->traitObject->getError(), 'Donec sed odio dui.');
 
 		// Test setting the entire list
 		$newerrors = array(
@@ -74,8 +74,8 @@ class ErrorBagTraitTest extends Basic
 			'Posuere velit aliquet.'
 		);
 
-		$this->obj->setErrors($newerrors);
+		$this->traitObject->setErrors($newerrors);
 
-		$this->assertEquals($this->obj->getErrors(), $newerrors);
+		$this->assertEquals($this->traitObject->getErrors(), $newerrors);
 	}
 }

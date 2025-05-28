@@ -23,7 +23,7 @@ class User extends Relational
 	 **/
 	public function helperGetFirstName()
 	{
-		return (strpos($this->name, ' ')) ? explode(' ', $this->name)[0] : $this->name;
+		return (strpos($this->name ? $this->name : '', ' ')) ? explode(' ', $this->name)[0] : $this->name;
 	}
 
 	/**

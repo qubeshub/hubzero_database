@@ -26,7 +26,7 @@ class RelationalTest extends Database
 	 *
 	 * @return  void
 	 **/
-	public function setUp()
+	public function setUp(): void
 	{
 		\Hubzero\Database\Relational::setDefaultConnection($this->getMockDriver());
 	}
