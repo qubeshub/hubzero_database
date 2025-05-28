@@ -35,34 +35,34 @@ class Pdo extends Driver
 			throw new ConnectionFailedException('PDO does not appear to be installed or enabled.', 500);
 		}
 
-		// Make sure the DSN is set
-		if (!isset($options['dsn']) || !$options['dsn'])
-		{
-			throw new ConnectionFailedException('DSN for PDO connection not set.', 500);
-		}
-
-		// Make sure extra PDO options array is set
-		if (!isset($options['extras']))
-		{
-			$options['extras'] = [];
-		}
-
+		// Try to connect
 		try
 		{
-			// Try to connect
-			$conn = new \PDO(
+			// Make sure the DSN is set
+			if (!isset($options['dsn']) || !$options['dsn'])
+			{
+				throw new ConnectionFailedException('DSN for PDO connection not set.', 500);
+			}
+
+			// Make sure extra PDO options array is set
+			if (!isset($options['extras']))
+			{
+				$options['extras'] = [];
+			}
+
+			// Establish connection string
+			$this->setConnection(new \PDO(
 				(string)$options['dsn'],
 				(string)$options['user'],
 				(string)$options['password'],
-				(array)$options['extras']);
+				(array)$options['extras']
+			));
 		}
 		catch (\PDOException $e)
 		{
-			$conn = null;
+			throw new ConnectionFailedException($e->getMessage(), 500);
 		}
 
-		$this->setConnection($conn);
-		
 		// Set error reporting to throw exceptions
 		$this->throwExceptions();
 
@@ -80,10 +80,7 @@ class Pdo extends Driver
 	 **/
 	public function throwExceptions()
 	{
-		if ($this->connection)
-		{
-			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-		}
+		$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
 		return $this;
 	}
