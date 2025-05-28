@@ -55,9 +55,6 @@ class Pdo extends Driver
 				(string)$options['user'],
 				(string)$options['password'],
 				(array)$options['extras']);
-
-			// Set error reporting to throw exceptions
-			$this->throwExceptions();
 		}
 		catch (\PDOException $e)
 		{
@@ -65,6 +62,9 @@ class Pdo extends Driver
 		}
 
 		$this->setConnection($conn);
+		
+		// Set error reporting to throw exceptions
+		$this->throwExceptions();
 
 		// Call parent construct
 		parent::__construct($options);
@@ -80,7 +80,10 @@ class Pdo extends Driver
 	 **/
 	public function throwExceptions()
 	{
-		$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		if ($this->connection)
+		{
+			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		}
 
 		return $this;
 	}
