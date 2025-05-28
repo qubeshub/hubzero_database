@@ -55,15 +55,4 @@ class Mysql extends PdoDriver
 		// Call parent construct
 		parent::__construct($options);
 	}
-
-	/**
-	 * Detects the driver syntax
-	 *
-	 * @return  string
-	 * @since   2.0.0
-	 **/
-	protected function detectSyntax()
-	{
-		return "mysql";
-	}
 }
