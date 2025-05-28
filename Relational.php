@@ -483,6 +483,16 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	}
 
 	/**
+	 * Serializes the model data for storage
+	 *
+	 * @return  array
+	 **/
+	public function __serialize()
+	{
+		return $this->getAttributes();
+	}
+	
+	/**
 	 * Unserializes the data into a new model
 	 *
 	 * @param   string  $data  The data to build from
@@ -495,6 +505,18 @@ class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
 	{
 		$this->__construct();
 		$this->set(unserialize($data));
+	}
+
+	/**
+	 * Unserializes the data into a new model
+	 *
+	 * @param   array  $data  The data to build from
+	 * @return  void
+	 **/
+	public function __unserialize($data)
+	{
+		$this->__construct();
+		$this->set($data);
 	}
 
 	/**
