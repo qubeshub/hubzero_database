@@ -9,6 +9,7 @@ namespace Qubeshub\Database;
 
 require_once PATH_APP . DS . 'libraries' . DS . 'Qubeshub' . DS . 'Database' . DS . 'Traits' . DS . 'ErrorBag.php';
 require_once PATH_APP . DS . 'libraries' . DS . 'Qubeshub' . DS . 'Database' . DS . 'Rows.php';
+require_once PATH_APP . DS . 'libraries' . DS . 'Qubeshub' . DS . 'Database' . DS . 'Rules.php';
 
 use Hubzero\Database\Relationship\BelongsToOne;
 use Hubzero\Database\Relationship\OneToMany;
