@@ -7,6 +7,8 @@
 
 namespace Qubeshub\Database\Relationship;
 
+use Event;
+
 /**
  * Database many to many relationship
  */
