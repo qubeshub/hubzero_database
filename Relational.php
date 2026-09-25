@@ -34,7 +34,7 @@ use Closure;
  */
 
 /** @phpstan-consistent-constructor */
-class Relational implements \IteratorAggregate, \ArrayAccess, \Serializable
+class Relational implements \IteratorAggregate, \ArrayAccess
 {
 	/*
 	 * Errors trait for error message handling
