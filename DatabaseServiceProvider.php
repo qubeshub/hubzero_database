@@ -28,12 +28,13 @@ class DatabaseServiceProvider extends ServiceProvider
 			$driver = (Config::get('dbtype') == 'mysql') ? 'pdo' : Config::get('dbtype');
 
 			$options = [
-				'driver'   => $driver,
-				'host'     => Config::get('host'),
-				'user'     => Config::get('user'),
-				'password' => Config::get('password'),
-				'database' => Config::get('db'),
-				'prefix'   => Config::get('dbprefix')
+				'driver'   => $app['config']->get('dbtype'),
+				'host'     => $app['config']->get('host'),
+				'user'     => $app['config']->get('user'),
+				'password' => $app['config']->get('password'),
+				'database' => $app['config']->get('db'),
+				'prefix'   => $app['config']->get('dbprefix'),
+				'charset'  => $app['config']->get('dbcharset')
 			];
 
 			return Driver::getInstance($options);
