@@ -95,7 +95,7 @@ class Relational implements \IteratorAggregate, \ArrayAccess
 	 *
 	 * @var  \Hubzero\Database\Driver|object
 	 **/
-	public $connection = null;
+	private $connection = null;
 
 	/**
 	 * Whether or not we're caching query results
